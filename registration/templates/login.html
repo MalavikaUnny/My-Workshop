@@ -1,3 +1,4 @@
+{%  load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +8,132 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVq
-    <meta charset="UTF-8">
-    <title>Title</title>
-    </head>
-    <body>
-    {{ forms }}
-        </body>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">About us</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Location <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Achievements</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'register_user' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}">Sign In</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="col-sm-6 col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 style="text-align: center">  Sign in</h1>
+        </div> <!-- panel-heading -->
+        <div class="panel-body">
+            <form role="form" action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    <div class="row" style="text-align: center">
+                        <div class="center-block profile-img">
+	                            <span class="fa-stack fa-4x">
+	                                <i class="fa fa-circle fa-stack-2x"></i>
+	                                <i class="fa fa-user fa-stack-1x" style="color:#eee;"></i>
+	                            </span>
+                        </div> <!-- center-block -->
+                    </div> <!-- row -->
+                    <div class="row">
+                        <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                            <div class="form-group {% if form.username.errors %}has-error{% endif %}">
+                                <div class="input-group">
+	                                    <span class="input-group-addon">
+	                                        <i class="fa fa-envelope"></i>
+	                                    </span>
+                                    <input class="form-control" placeholder="Email Address"  name="username" type="email" autofocus>
+                                </div> <!-- input-group -->
+                            </div> <!-- form-group -->
+                            <div class="form-group {% if form.password.errors %}has-error{% endif %}">
+                                <div class="input-group">
+	                                    <span class="input-group-addon">
+	                                        <i class="fa fa-expeditedssl"></i>
+	                                    </span>
+                                    <input class="form-control" placeholder="Password" name="password" type="password">
+                                    <input type="hidden" name="next" value="{{ next }}" />
+                                </div> <!-- input-group-addon -->
+                            </div> <!-- input-group --> <br>
+                            {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <i class="fa fa-warning"></i> "Your username and password didn't match. Please try again."
+                            </div> <!-- alert alert-danger -->
+                            {% endif %}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg btn-primary btn-block" id="loginbutton" data-loading-text="Signing In...">Sign In <i class="fa fa-sign-in"></i></button>
+                            </div> <!-- form-group -->
+                        </div> <!-- col-sm-12 col-md-10 -->
+                    </div> <!-- row -->
+                </fieldset>
+            </form>
+        </div> <!-- panel-body -->
+        <div class="panel-footer" style="text-align: center;">
+            "Don't have an account? "<a href="{% url 'register_user' %}" onClick="">  "Sign Up Here"  </a>
+            <div class="password-reset-link">
+                <a href="{% url 'password_reset' %}"> "Lost Password?"</a>
+            </div>
+        </div> <!-- panel footer -->
+    </div> <!-- panel -->
+</div> <!-- col-sm-6 col-md-4 col-md-offset-4 -->
+</div>
+<script>
+    $('#loginbutton').on('click', function () {
+        $(this).button('loading').delay(1000).queue(function() {
+            $(this).button('reset');
+            $(this).dequeue();
+        });
+    });
+</script>
+<script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
+</body>
 </html>

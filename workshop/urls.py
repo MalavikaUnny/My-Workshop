@@ -6,7 +6,7 @@ from workshop.views import *
 from django.views.generic import TemplateView
 from registration import urls as reg_urls
 from django.contrib.auth import views as auth_views
-import registration.views as views
+
 
 
 admin.autodiscover()
@@ -15,7 +15,7 @@ urlpatterns = [
     # Examples:
     # url(r'^$', 'workshop.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^user/login/$', anonymous_required(auth_views.login),{'template_name': 'registration/login.html'},name='login'),
+    url(r'^user/login/$', anonymous_required(auth_views.login),{'template_name': 'login.html'},name='login'),
     url(r'^$', Home.as_view(), name='home'),
     url(r'^register/', include('registration.urls')),
     url(r'^admin/', include(admin.site.urls)),
