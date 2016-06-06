@@ -1,6 +1,5 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from bootstrap3_datetime.widgets import DateTimePicker
 from registration.models import *
 from django.forms.models import ModelForm
 from django.contrib import admin
@@ -9,12 +8,11 @@ from django.contrib import admin
 
 user_widgets = {
     'user_first_name': forms.TextInput(attrs={'placeholder':_('First Name'), 'required': True}),
-    'user_dob': DateTimePicker(options={"getUTCDate": True, "pickTime": True,
-                                              "date":"fa fa-calendar", "viewMode":'years',
-                                              "format":'DD/MM/YYYY'},
-                                     attrs={'placeholder':_('DD/MM/YYYY'), 'required': True, 'class':'datepicker'}),
+    'user_DOB': forms.TextInput(attrs={'placeholder': _('DOB'), 'required': True}),
+
     'user_last_name': forms.TextInput(attrs={'placeholder':_('Last Name'),
                                              'required': True}),
+
     'email': forms.TextInput(attrs={'placeholder':_('Your Email address'),
                                              'required': True}),
     'username': forms.TextInput(attrs={'placeholder':_('Username'),

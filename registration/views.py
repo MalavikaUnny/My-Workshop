@@ -14,7 +14,7 @@ class Home(TemplateView):
     template_name="index.html"
 
 class UserRegistrationView(AnonymousRequiredMixin, FormView):
-    template_name = "register_user.html"
+    template_name = "register/user/register_user.html"
 
     authenticated_redirect_url = reverse_lazy(u"home")
     form_class = UserRegistrationForm
