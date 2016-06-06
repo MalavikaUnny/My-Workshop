@@ -5,7 +5,7 @@ from braces.views import LoginRequiredMixin, AnonymousRequiredMixin
 from django.views.generic.edit import FormView, UpdateView
 from registration.forms import UserRegistrationForm
 from registration.models import User
-
+from registration.forms import ChocolateAddForm
 
 
 def index(request):
@@ -19,6 +19,16 @@ class UserRegistrationView(AnonymousRequiredMixin, FormView):
     authenticated_redirect_url = reverse_lazy(u"home")
     form_class = UserRegistrationForm
     success_url = '/register/user/success/'
+
+    def form_valid(self, form):
+        form.save()
+        return FormView.form_valid(self, form)
+
+
+class AddChocolateView(FormView):
+    template_name = "add_chocolate.html"
+    form_class = ChocolateAddForm
+    success_url = '/register/chocolate/success'
 
     def form_valid(self, form):
         form.save()

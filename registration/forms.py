@@ -30,7 +30,7 @@ user_extra_widgets = {
 
 user_extra_fields = ['user_first_name', 'user_last_name', 'user_dob','user_gender','user_github', 'user_linkedin', 'user_bio', 'user_occupation', 'user_nationality' ]
 
-user_fields = [ 'email', 'username' ]
+user_fields = ['email', 'username']
 
 
 
@@ -73,4 +73,24 @@ class UserRegistrationForm(ModelForm):
         user.set_password(self.cleaned_data["password"])
         if commit: user.save()
         return user
+
+Chocolate_fields = ['name', 'description', 'manufacturer', 'price']
+Chocolate_widgets = {
+    'name': forms.TextInput(attrs={'placeholder':_('Chocolate Name'), 'required': True}),
+    'description': forms.TextInput(attrs={'placeholder': _('Chocolate Description'), 'required': True}),
+
+    'manufacturer': forms.TextInput(attrs={'placeholder':_('Chocolate Manufacturer'),
+                                             'required': True}),
+
+    'price': forms.TextInput(attrs={'placeholder':_('Price'),
+                                             'required': True}),
+}
+
+class ChocolateAddForm(ModelForm):
+    class Meta:
+        model = Chocolate
+        fields = Chocolate_fields
+        widgets = Chocolate_widgets
+
+
 
